@@ -4,6 +4,12 @@ class Path
 
   def initialize
     @path = get_path
+    @current_direction = 'up'
+
+    @movement = {up: 0, left: 0, right: 0, down: 0 }
+
+    @direction = ['up', 'right', 'down', 'left']
+
   end
 
   def get_path
@@ -29,6 +35,49 @@ class Path
     path.split('')
   end
 
+  def move
+    @path.each { |d|
+      move_forward if d == 'g'
+      move_left    if d == 'l'
+      move_right   if d == 'r'
+    }
+
+    vert = @movement[:up]   - @movement[:down]
+    hor  = @movement[:left] - @movement[:right]
+
+    puts (vert + hor == 0) ? true : false
+  end
+
+  def move_left
+    index = @direction.find_index(@current_direction)
+    @current_direction = @direction[index - 1]
+    @movement[@current_direction.to_sym] += 1
+  end
+
+  def move_forward
+    # index = @direction.find_index(@current_direction)
+    # @current_direction = @direction[index - 1]
+    @movement[@current_direction.to_sym] += 1
+  end
+
+  def move_right
+    index = @direction.find_index(@current_direction)
+    @current_direction = @direction[index + 1]
+    @movement[@current_direction.to_sym] += 1
+  end
+
+
+
+
+  #
+  # def move_forward
+  #   @movement[@current_direction.to_sym] += 1
+  # end
+  #
+  # def move_left
+  #   @current_direction = 'left'
+  #   @movement[@current_direction.to_sym] += 1
+  # end
 
 
 end
