@@ -1,6 +1,10 @@
 require 'pry'
 
+require './lib/path'
 
-def prompt_user
-  @path = gets.chomp
-end
+
+path = Path.new
+
+
+
+# binding.pry
